@@ -1,0 +1,32 @@
+<%-include("./includes/header.ejs")%>
+<body>
+  <h3>Welcome to Book Store</h3>
+  <%if(!currUser){%>
+    <a href="http://localhost:8000/login">Login</a>&nbsp;&nbsp;
+    <a href="http://localhost:8000/signup">Signup</a>&nbsp; &nbsp;
+  <%}%>
+  <%if(currUser){%>
+    <h3>Get Book by author and genre</h3>
+    <form action="/books" method="get">
+      <label for="author">Author: </label>
+    <input type="text" id="author" name="author" placeholder="enter author name">
+    <br><br>
+    <label for="genre">Genre: </label>
+    <input type="text" id="genre" name="genre" placeholder="enter genre of book">
+    <br><br>
+    <label for="page">select page: </label>
+    <select name="page" id="page">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <button type="submit">Get Books</button>
+    </form>
+    <br><br>
+  <a href="http://localhost:8000/books/new">create new book</a>
+  &nbsp; &nbsp; <br><br>
+    <form action="/logout" method="post">
+      <a href=""><button>Logout</button></a>
+    </form>
+  <%}%>
+</body>

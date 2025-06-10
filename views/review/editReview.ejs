@@ -1,0 +1,15 @@
+<%-include("../includes/header.ejs")%>
+<body>
+  <h3>Update Review</h3>
+  <h4>ID: <%=review._id%></h4>
+  <form method="POST" action="/books/<%=review.book%>/reviews/<%=review._id%>?_method=PATCH">
+    <label for="comment">Comment: </label>
+    <br><br>
+    <textarea name="comment" id="comment" ><%=review.comment%></textarea>
+    <br><br>
+    <label for="range">Range: </label>
+    <input type="range" name="rating" min="1" max="5" default="3">
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+</body>

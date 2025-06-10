@@ -1,0 +1,16 @@
+<%-include("../includes/header.ejs")%>
+<body>
+  <h3>Create New Book</h3>
+  <form action="/books" method="post">
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title" placeholder="enter book title">
+    <br><br>
+    <label for="author">Author: </label>
+    <input type="text" id="author" name="author" placeholder="enter author name">
+    <br><br>
+    <label for="genre">Genre: </label>
+    <input type="text" id="genre" name="genre" placeholder="enter genre of book">
+    <br><br>
+    <button>new book</button>
+  </form>
+</body>

@@ -1,0 +1,25 @@
+<%-include("../includes/header.ejs")%>
+<body>
+  <h3>All Books are here....</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>author</th>
+        <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%for(let book of books){%>
+      <tr>
+        <td><%=book.title%></td>
+        <td><%=book.author%></td>
+        <td><%=book.genre%></td>
+        <td><a href="http://localhost:8000/books/<%=book._id%>">see in details</a></td>
+      </tr>
+    <%}%>
+    </tbody>
+  </table>
+  <br><br>
+  &#x261A;<a href="http://localhost:8000/">Back to home...</a>
+</body>

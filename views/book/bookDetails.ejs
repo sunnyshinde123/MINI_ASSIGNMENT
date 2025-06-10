@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .review{
+      border:2px solid black;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Book Details</h3>
+  <h4>Book ID: <%=book._id%></h4>
+  <p>Book Title: <%=book.title%></p>
+  <p>Book genre: <%=book.genre%></p>
+  <p>Book author: @<%=book.author%></p>
+  &#x261A;<a href="http://localhost:8000/">Back to home...</a>
+  <hr>
+  <h4>Review rating: </h4>
+  <form action="/books/<%=book._id%>/reviews" method="post">
+    <label for="comment">Comment: </label>
+    <br><br>
+    <textarea name="comment" id="comment" placeholder="write your comment here..." rows="5" cols="30"></textarea>
+    <br><br>
+    <label for="rating">Rating: </label>
+    <input type="range" name="rating" min="1" max="5" default="3" id="rating">
+    <br><br>
+    <button>Submit</button>
+  </form>
+  <br>
+  <hr>
+  <h3>List of reviews: </h3>
+  
+  <div class="box">
+    <%for(let review of book.reviews){%>
+    <div class="review">
+      <h5>Review by @<%=review.user.username%></h5>
+      <p>Comment: <%=review.comment%></p>
+      <p>Rating: <%=review.rating%></p>
+      <%if(currUser.id==review.user._id){%>
+        <a href="http://localhost:8000/books/<%=book._id%>/reviews/<%=review._id%>/edit">edit..</a>
+      <%}%>
+    </div>
+  <%}%>
+  </div>
+</body>
+</html>

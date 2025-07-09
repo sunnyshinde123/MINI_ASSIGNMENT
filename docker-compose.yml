@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mymongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: books
+    volumes:
+      - mongo:/data/db
+    networks:
+      - twotier
+    ports:
+      - 27017:27017
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongosh", "-uroot", "-padmin"]
+      interval: 10s
+      timeout: 20s
+      retries: 10
+      start_period: 60s
+
+
+  nodeapp:
+    build:
+      context: .
+    container_name: nodeapp
+    environment:
+      MONGO_URL: mongodb://root:admin@mymongo:27017/books
+      SECRET_KEY: Books
+    networks:
+      - twotier
+    ports:
+      - 8000:8000
+    restart: always
+    depends_on:
+      - mongo
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/"]
+      interval: 10s
+      timeout: 20s
+      retries: 10
+      start_period: 60s
+
+volumes:
+  mongo:
+
+networks:
+  twotier:
